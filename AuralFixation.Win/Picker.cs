@@ -30,7 +30,8 @@ namespace AuralFixation.Win
 			_icons = new ImageList();
 			_size = new Size(256, 256);
 			_icons.ImageSize = _size;
-			foreach(var file in _service.LoadIcons(@"H:\Music\Albums\__ICONS"))
+			_icons.ColorDepth = ColorDepth.Depth32Bit;
+			foreach (var file in _service.LoadIcons(@"H:\Music\Albums\__ICONS"))
 			{
 				_icons.Images.Add(file.Name.ToLower(), Image.FromFile(file.Uri));
 			}

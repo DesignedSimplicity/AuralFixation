@@ -39,7 +39,7 @@
 			this.list.Location = new System.Drawing.Point(0, 0);
 			this.list.MultiSelect = false;
 			this.list.Name = "list";
-			this.list.Size = new System.Drawing.Size(1262, 679);
+			this.list.Size = new System.Drawing.Size(1582, 959);
 			this.list.TabIndex = 0;
 			this.list.UseCompatibleStateImageBehavior = false;
 			// 
@@ -47,7 +47,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1262, 679);
+			this.ClientSize = new System.Drawing.Size(1582, 959);
 			this.Controls.Add(this.list);
 			this.Name = "Picker";
 			this.Text = "Picker";
