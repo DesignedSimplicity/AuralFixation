@@ -12,9 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 using AuralFixation.Api;
-using System.Windows.Threading;
 
 namespace AuralFixation.App
 {
@@ -31,6 +31,17 @@ namespace AuralFixation.App
 			InitializeComponent();
 
 			BuildViewModel();
+
+			CreateTrayIcon();
+		}
+
+		public void CreateTrayIcon()
+		{
+			var tray = new System.Windows.Forms.NotifyIcon
+			{
+				Icon = new System.Drawing.Icon("Icon.ico"),
+				Visible = true
+			};
 		}
 
 		public void BuildViewModel()
@@ -60,6 +71,12 @@ namespace AuralFixation.App
 			
 		}
 
+		protected override void OnStateChanged(EventArgs e)
+		{
+			if (WindowState == WindowState.Minimized) this.Hide();
+
+			base.OnStateChanged(e);
+		}
 
 		private static string _category = "";
 		private void Click(object sender, RoutedEventArgs e)
