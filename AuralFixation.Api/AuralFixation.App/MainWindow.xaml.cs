@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using AuralFixation.Api;
+using System.Windows.Threading;
 
 namespace AuralFixation.App
 {
@@ -22,7 +23,7 @@ namespace AuralFixation.App
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private Service _service;
+		private static Service _service;
 		private PlayerTree _model;
 
 		public MainWindow()
@@ -54,8 +55,52 @@ namespace AuralFixation.App
 				}
 			}
 
-			listView.ItemsSource = _model.Readers[0].Categories;
 			items.ItemsSource = _model.Readers[0].Categories;
+
+			
+		}
+
+
+		private static string _category = "";
+		private void Click(object sender, RoutedEventArgs e)
+		{
+			var btn = (Button)e.Source;
+			_category = btn.Tag.ToString();
+			_timer.Start();
+		}
+
+		private void DoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			_timer.Stop();
+
+			Play(_category, true);
+
+			e.Handled = true;
+		}
+
+		private static void Play(string category, bool reset = false)
+		{
+			var request = new PlayRequest()
+			{
+				FromCart = _service.ListReaders().First().Key,
+				InCategory = category,
+				ResetPlaylist = reset,
+			};
+			_service.Play(request);
+		}
+
+		private static DispatcherTimer _timer =
+			new DispatcherTimer(
+				new TimeSpan(0, 0, 0, 0, Handle.GetDoubleClickTime()),
+				DispatcherPriority.Background,
+				ClickTick,
+				Dispatcher.CurrentDispatcher);
+
+		private static void ClickTick(object sender, EventArgs e)
+		{
+			_timer.Stop();
+
+			if (!String.IsNullOrWhiteSpace(_category)) Play(_category);
 		}
 	}
 }

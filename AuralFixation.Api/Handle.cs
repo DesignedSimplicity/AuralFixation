@@ -10,5 +10,7 @@ namespace AuralFixation.Api
 		[DllImport("user32")] public static extern ushort FindWindow(string lpClassName, string lpWindowName);
 
 		[DllImport("user32")] public static extern ushort SendMessage(int hwnd, int wMsg, int wParam, int lParam);
+
+		[DllImport("user32")] public static extern int GetDoubleClickTime();
 	}
 }

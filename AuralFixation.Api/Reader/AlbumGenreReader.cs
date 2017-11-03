@@ -32,14 +32,19 @@ namespace AuralFixation.Api.Reader
 
 		public List<Media> Pick(string category = "")
 		{
-			var root = PickRoot();
-			if (String.IsNullOrEmpty(category)) category = PickGenre();
+			var path = "";
 
-			var path = Path.Combine(root, category) + Path.DirectorySeparatorChar;
+			while (!Directory.Exists(path))
+			{
+				var root = PickRoot();
+				if (String.IsNullOrEmpty(category)) category = PickGenre();
+				path = Path.Combine(root, category) + Path.DirectorySeparatorChar;
+			}
+
 			var albums = _albums.Where(x => x.StartsWith(path.ToLowerInvariant())).ToArray();
 			var album = albums[Picker.Pick(albums.Length)];
 
-			return Media.FromPath(album);			
+			return Media.FromPath(album);
 		}
 
 		//================================================================================
@@ -59,9 +64,9 @@ namespace AuralFixation.Api.Reader
 			foreach (DirectoryInfo genre in dir.GetDirectories())
 			{
 				var key = genre.Name.ToLowerInvariant();
-				if (!key.StartsWith("_") && !_genres.Any(x => x.Key == key))
+				if (!key.StartsWith("_"))
 				{
-					_genres.Add(new Genre(genre.Name));
+					if (!_genres.Any(x => x.Key == key)) _genres.Add(new Genre(genre.Name));
 					foreach(var album in genre.GetDirectories())
 					{
 						_albums.Add(album.FullName.ToLowerInvariant());

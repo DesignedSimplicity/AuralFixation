@@ -31,6 +31,12 @@ namespace AuralFixation.Api
 			return _engine.Readers;
 		}
 
+		public void Reset()
+		{
+			_engine.Player.Stop();
+			_engine.Player.Clear();
+		}
+
 		/// <summary>
 		/// Plays a random set of media from a given cartridge with the option to limit it by a group
 		/// </summary>
@@ -38,8 +44,7 @@ namespace AuralFixation.Api
 		public PlayResponse Play(PlayRequest request)
 		{
 			var response = new PlayResponse();
-			try
-			{
+
 				var reader = _engine.GetReader(request.FromCart);
 				var files = reader.Pick(request.InCategory);
 
@@ -48,11 +53,7 @@ namespace AuralFixation.Api
 
 				player.Play(files);
 				response.Playing = player.Status == PlayerStatus.Playing;
-			}
-			catch (Exception ex)
-			{
-				response.Error = ex.Message;
-			}
+
 			return response;
 		}
 	}
