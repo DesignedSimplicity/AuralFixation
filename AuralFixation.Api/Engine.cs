@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using AuralFixation.Api.Media;
 using AuralFixation.Api.Model;
 using AuralFixation.Api.Player;
 using AuralFixation.Api.Reader;
@@ -13,36 +12,43 @@ namespace AuralFixation.Api
 {
 	public class Engine
 	{
-		private List<IReader> _readers;
 		private IPlayer _player;
+		private List<IReader> _readers;
 
-		public void Init()
+		public IPlayer Player
 		{
-			_player = new WinAmp();
+			get
+			{
+				// init player
+				if (_player == null) _player = new WinAmpPlayer();
 
-			_readers = new List<IReader>();
-			_readers.Add(new AlbumGenreReader());
+				// start up player if needed
+				if (!_player.Initialized) _player.Start();
 
-			ListCarts();
+				// get instance of player
+				return _player;
+			}
 		}
 
-		public List<Cart> ListCarts()
+		public List<IReader> Readers
 		{
-			return _readers.Select(x => x.Cart).ToList();
+			get
+			{
+				// init readers if necessary
+				if (_readers == null)
+				{
+					_readers = new List<IReader>();
+					_readers.Add(new AlbumGenreReader());
+				}
+
+				// list all readers
+				return _readers;
+			}
 		}
 
-		public IReader LoadCart(Cart cart)
+		public IReader GetReader(string key)
 		{
-			return _readers.FirstOrDefault(x => x.Cart == cart);
-		}
-
-		public IPlayer GetPlayer()
-		{
-			// start up player if needed
-			if (!_player.Initialized) _player.Start();
-
-			// get instance of player
-			return _player;
+			return _readers.FirstOrDefault(x => x.Key == key);
 		}
 	}
 }

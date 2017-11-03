@@ -1,6 +1,6 @@
 ﻿namespace AuralFixation.Win
 {
-    partial class Splash
+    partial class Picker
     {
         /// <summary>
         /// Required designer variable.
@@ -28,34 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.button1 = new System.Windows.Forms.Button();
+			this.list = new System.Windows.Forms.ListView();
 			this.SuspendLayout();
 			// 
-			// button1
+			// list
 			// 
-			this.button1.Location = new System.Drawing.Point(13, 13);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 0;
-			this.button1.Text = "button1";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.list.BackColor = System.Drawing.SystemColors.Control;
+			this.list.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.list.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.list.Location = new System.Drawing.Point(0, 0);
+			this.list.MultiSelect = false;
+			this.list.Name = "list";
+			this.list.Size = new System.Drawing.Size(1262, 679);
+			this.list.TabIndex = 0;
+			this.list.UseCompatibleStateImageBehavior = false;
 			// 
-			// Splash
+			// Picker
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(640, 360);
-			this.Controls.Add(this.button1);
-			this.Name = "Splash";
-			this.Text = "Splash";
+			this.ClientSize = new System.Drawing.Size(1262, 679);
+			this.Controls.Add(this.list);
+			this.Name = "Picker";
+			this.Text = "Picker";
+			this.Load += new System.EventHandler(this.Picker_Load);
 			this.ResumeLayout(false);
 
         }
 
 		#endregion
 
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.ListView list;
 	}
 }
 

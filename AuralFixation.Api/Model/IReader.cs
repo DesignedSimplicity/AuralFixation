@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using AuralFixation.Api.Media;
-using AuralFixation.Api.Model;
 
-namespace AuralFixation.Api.Reader
+namespace AuralFixation.Api.Model
 {
 	public interface IReader
 	{
-		Cart Cart { get; }
+		string Key { get; }
+		string Name { get; }
+		string[] Categories { get; }
 
-		List<MediaFile> Pick(string group);
+		void Init();
+
+		List<Media> Pick(string group);
 	}
 
 	public class Picker

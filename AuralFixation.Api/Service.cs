@@ -15,51 +15,54 @@ namespace AuralFixation.Api
 		public Service()
 		{
 			_engine = new Engine();
-			_engine.Init();
+		}
+
+		public List<Cover> LoadIcons(string uri)
+		{
+			return Cover.FromPath(uri);
 		}
 
 		/// <summary>
 		/// Loads and lists all media cartridges available from loaders
 		/// </summary>
 		/// <returns></returns>
-		public List<Cart> ListCarts()
+		public List<IReader> ListReaders()
 		{
-			return _engine.ListCarts();
+			return _engine.Readers;
 		}
 
 		/// <summary>
 		/// Plays a random set of media from a given cartridge with the option to limit it by a group
 		/// </summary>
 		/// <returns></returns>
-		public PlayCartResponse PlayCart(PlayCartRequest request)
+		public PlayResponse Play(PlayRequest request)
 		{
-			var response = new PlayCartResponse();
+			var response = new PlayResponse();
 			try
 			{
-				var reader = _engine.LoadCart(request.FromCart);
-				var files = reader.Pick(request.InGroup);
+				var reader = _engine.GetReader(request.FromCart);
+				var files = reader.Pick(request.InCategory);
 
-				var player = _engine.GetPlayer();
-				if (request.ResetPlaylist || player.Status == Player.PlayerStatus.Stopped) player.Clear();
+				var player = _engine.Player;
+				if (request.ResetPlaylist || player.Status == PlayerStatus.Stopped) player.Clear();
 
 				player.Play(files);
-				response.Playing = player.Status == Player.PlayerStatus.Playing;
+				response.Playing = player.Status == PlayerStatus.Playing;
 			}
 			catch (Exception ex)
 			{
 				response.Error = ex.Message;
 			}
-
 			return response;
 		}
 	}
 
-	public class PlayCartRequest
+	public class PlayRequest
 	{
-		public Cart FromCart { get; set; }
+		public string FromCart { get; set; }
 
-		// optional group based filter for each reader
-		public string InGroup { get; set; } = "";
+		// optional category based filter for each reader
+		public string InCategory { get; set; } = "";
 
 		// if playing then add files to end of current queue
 		// if stopped then clear queue and play files
@@ -67,7 +70,7 @@ namespace AuralFixation.Api
 		public bool ResetPlaylist { get; set; } = false;
 	}
 
-	public class PlayCartResponse
+	public class PlayResponse
 	{
 		public bool Playing { get; set; }
 		public string Error { get; set; }

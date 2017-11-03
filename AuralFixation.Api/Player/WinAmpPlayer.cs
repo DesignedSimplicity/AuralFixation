@@ -7,11 +7,11 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using AuralFixation.Api;
-using AuralFixation.Api.Media;
+using AuralFixation.Api.Model;
 
 namespace AuralFixation.Api.Player
 {
-    public class WinAmp : IPlayer
+    public class WinAmpPlayer : IPlayer
     {
 		//================================================================================
 		#region Internal Helpers
@@ -204,7 +204,7 @@ namespace AuralFixation.Api.Player
 		/// Adds file to current playlist and starts playing if stopped
 		/// </summary>
 		/// <param name="file"></param>
-		public void Play(MediaFile file)
+		public void Play(Media file)
 		{
 			Add(file);
 			Play();
@@ -214,7 +214,7 @@ namespace AuralFixation.Api.Player
 		/// <summary>
 		/// Adds files to current playlist and starts playing if stopped
 		/// </summary>
-		public void Play(IEnumerable<MediaFile> files)
+		public void Play(IEnumerable<Media> files)
 		{
 			Add(files);
 			Play();
@@ -224,7 +224,7 @@ namespace AuralFixation.Api.Player
 		/// <summary>
 		/// Adds file to current playlist
 		/// </summary>
-		public void Add(MediaFile file)
+		public void Add(Media file)
 		{
 			Run($"/ADD \"{file.Uri}\"");
 		}
@@ -233,7 +233,7 @@ namespace AuralFixation.Api.Player
 		/// <summary>
 		/// Adds files to current playlist
 		/// </summary>
-		public void Add(IEnumerable<MediaFile> files)
+		public void Add(IEnumerable<Media> files)
 		{
 			foreach(var file in files)
 			{
