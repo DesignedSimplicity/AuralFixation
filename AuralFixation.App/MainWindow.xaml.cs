@@ -23,22 +23,33 @@ namespace AuralFixation.App
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		private static DispatcherTimer _timer;
 		private static Service _service;
+		private static string _category;
 		private PlayerTree _model;
 
 		public MainWindow()
 		{
 			InitializeComponent();
 
+			ConfigureWindow();
+
 			BuildViewModel();
+		}
+
+		public void ConfigureWindow()
+		{
+			_service = new Service();
+
+			_timer = new DispatcherTimer(DispatcherPriority.Background, Dispatcher.CurrentDispatcher);
+			_timer.Interval = new TimeSpan(0, 0, 0, 0, Handle.GetDoubleClickTime());
+			_timer.Tick += ClickTick;
 
 			WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 		}
 
 		public void BuildViewModel()
 		{
-			_service = new Service();
-
 			_model = new PlayerTree();
 
 			foreach (var reader in _service.ListReaders())
@@ -50,7 +61,7 @@ namespace AuralFixation.App
 
 				foreach (var category in reader.Categories)
 				{
-					var uri = System.IO.Path.Combine(@"H:\Music\Albums\__ICONS", category + ".jpg");
+					var uri = System.IO.Path.Combine(Config.GenreIconPath, category + ".jpg");
 					var i = new BitmapImage(new Uri(uri));
 					var c = new CategoryNode(category, i);
 					r.Categories.Add(c);
@@ -60,14 +71,6 @@ namespace AuralFixation.App
 			items.ItemsSource = _model.Readers[0].Categories;			
 		}
 
-		protected override void OnStateChanged(EventArgs e)
-		{
-			if (WindowState == WindowState.Minimized) this.Visibility = Visibility.Collapsed;
-
-			base.OnStateChanged(e);
-		}
-
-		private static string _category = "";
 		private void Click(object sender, RoutedEventArgs e)
 		{
 			var btn = (Button)e.Source;
@@ -82,6 +85,13 @@ namespace AuralFixation.App
 			Play(_category, true);
 
 			e.Handled = true;
+		}
+
+		private static void ClickTick(object sender, EventArgs e)
+		{
+			_timer.Stop();
+
+			if (!String.IsNullOrWhiteSpace(_category)) Play(_category);
 		}
 
 		private static void Play(string category, bool reset = false)
@@ -100,20 +110,6 @@ namespace AuralFixation.App
 			{
 				MessageBox.Show(ex.StackTrace, ex.Message);
 			}
-		}
-
-		private static DispatcherTimer _timer =
-			new DispatcherTimer(
-				new TimeSpan(0, 0, 0, 0, Handle.GetDoubleClickTime()),
-				DispatcherPriority.Background,
-				ClickTick,
-				Dispatcher.CurrentDispatcher);
-
-		private static void ClickTick(object sender, EventArgs e)
-		{
-			_timer.Stop();
-
-			if (!String.IsNullOrWhiteSpace(_category)) Play(_category);
 		}
 	}
 }

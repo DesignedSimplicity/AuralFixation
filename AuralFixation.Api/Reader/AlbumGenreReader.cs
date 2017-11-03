@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using AuralFixation.Api;
 using AuralFixation.Api.Model;
 
 namespace AuralFixation.Api.Reader
@@ -14,7 +15,6 @@ namespace AuralFixation.Api.Reader
 		private bool _init = false;
 		private List<Genre> _genres = new List<Genre>();
 		private HashSet<string> _albums = new HashSet<string>();
-		private string[] _roots = { @"H:\Music\Albums", @"H:\Music\Albums\_FLAC" };
 
 		public string Key { get { return "AlbumGenreReader"; } }
 		public string Name { get { return "Albums by genre"; } }
@@ -23,7 +23,7 @@ namespace AuralFixation.Api.Reader
 		public void Init()
 		{
 			if (_init) return;
-			foreach (var root in _roots)
+			foreach (var root in Config.AlbumGenrePaths)
 			{
 				LoadGenres(root);
 			}
