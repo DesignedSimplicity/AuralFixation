@@ -207,7 +207,11 @@ namespace AuralFixation.Api.Player
 		public void Play(Media file)
 		{
 			Add(file);
-			if (Status != PlayerStatus.Playing) Play();
+			if (Status != PlayerStatus.Playing)
+			{
+				Thread.Sleep(1000);
+				Play();
+			}
 		}
 
 		//--------------------------------------------------------------------------------
@@ -217,7 +221,11 @@ namespace AuralFixation.Api.Player
 		public void Play(IEnumerable<Media> files)
 		{
 			Add(files);
-			if (Status != PlayerStatus.Playing) Play();
+			if (Status != PlayerStatus.Playing)
+			{
+				Thread.Sleep(1000);
+				Play();
+			}
 		}
 
 		//--------------------------------------------------------------------------------

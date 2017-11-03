@@ -55,6 +55,7 @@ namespace AuralFixation.App
 			this.WindowState = WindowState.Normal;
 			this.Visibility = Visibility.Visible;
 			SystemCommands.RestoreWindow(this);
+			this.Activate();
 		}
 
 		public void BuildViewModel()

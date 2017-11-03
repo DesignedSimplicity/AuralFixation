@@ -32,32 +32,21 @@ namespace AuralFixation.Api.Reader
 
 		public List<Media> Pick(string category = "")
 		{
-			var path = "";
+			var albums = _albums.ToArray();
 
-			while (!Directory.Exists(path))
+			if (!String.IsNullOrEmpty(category))
 			{
-				var root = PickRoot();
-				if (String.IsNullOrEmpty(category)) category = PickGenre();
-				path = Path.Combine(root, category) + Path.DirectorySeparatorChar;
+				var path = Path.DirectorySeparatorChar + category.ToLowerInvariant() + Path.DirectorySeparatorChar;
+				albums = _albums.Where(x => x.Contains(path)).ToArray();
 			}
-
-			var albums = _albums.Where(x => x.StartsWith(path.ToLowerInvariant())).ToArray();
 			var album = albums[Picker.Pick(albums.Length)];
+
+			Console.WriteLine(album);
 
 			return Media.FromPath(album);
 		}
 
 		//================================================================================
-		private string PickRoot()
-		{
-			return _roots[Picker.Pick(_roots.Length)];
-		}
-
-		private string PickGenre()
-		{
-			return _genres[Picker.Pick(_genres.Count)].Name;
-		}
-
 		private void LoadGenres(string path)
 		{
 			var dir = new DirectoryInfo(path);
