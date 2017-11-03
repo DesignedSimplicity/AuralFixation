@@ -100,15 +100,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AuralFixation.Api.csproj">
-      <Project>{b019456b-7943-4378-a7b6-8352cb680bf5}</Project>
-      <Name>AuralFixation.Api</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AuralFixation.Api\AuralFixation.Api.csproj">
+      <Project>{b019456b-7943-4378-a7b6-8352cb680bf5}</Project>
+      <Name>AuralFixation.Api</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

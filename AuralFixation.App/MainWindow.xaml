@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AuralFixation.App"
         mc:Ignorable="d"
-        Title="Aural Fixation" Height="1000" Width="1600">
+        Title="Aural Fixation" Height="880" Width="1414" ResizeMode="CanMinimize">
     <Grid Background="Black">
 		<ItemsControl x:Name="items">
 			<ItemsControl.ItemsPanel>

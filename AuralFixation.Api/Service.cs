@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 using AuralFixation.Api.Model;
 
@@ -45,14 +45,19 @@ namespace AuralFixation.Api
 		{
 			var response = new PlayResponse();
 
-				var reader = _engine.GetReader(request.FromCart);
-				var files = reader.Pick(request.InCategory);
+			var reader = _engine.GetReader(request.FromCart);
+			var files = reader.Pick(request.InCategory);
 
-				var player = _engine.Player;
-				if (request.ResetPlaylist || player.Status == PlayerStatus.Stopped) player.Clear();
+			var player = _engine.Player;
+			if (request.ResetPlaylist || player.Status == PlayerStatus.Stopped)
+			{
+				player.Stop();
+				player.Clear();
+				Thread.Sleep(100);
+			}
 
-				player.Play(files);
-				response.Playing = player.Status == PlayerStatus.Playing;
+			player.Play(files);
+			response.Playing = player.Status == PlayerStatus.Playing;
 
 			return response;
 		}

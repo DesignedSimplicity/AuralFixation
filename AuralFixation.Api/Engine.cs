@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using AuralFixation.Api.Model;
@@ -24,6 +25,9 @@ namespace AuralFixation.Api
 
 				// start up player if needed
 				if (!_player.Initialized) _player.Start();
+
+				// wait 100 ms
+				Thread.Sleep(100);
 
 				// get instance of player
 				return _player;

@@ -207,7 +207,7 @@ namespace AuralFixation.Api.Player
 		public void Play(Media file)
 		{
 			Add(file);
-			Play();
+			if (Status != PlayerStatus.Playing) Play();
 		}
 
 		//--------------------------------------------------------------------------------
@@ -217,7 +217,7 @@ namespace AuralFixation.Api.Player
 		public void Play(IEnumerable<Media> files)
 		{
 			Add(files);
-			Play();
+			if (Status != PlayerStatus.Playing) Play();
 		}
 
 		//--------------------------------------------------------------------------------

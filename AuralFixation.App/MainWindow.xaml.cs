@@ -33,15 +33,28 @@ namespace AuralFixation.App
 			BuildViewModel();
 
 			CreateTrayIcon();
+
+			WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 		}
 
 		public void CreateTrayIcon()
 		{
+			var icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().Location);
+
 			var tray = new System.Windows.Forms.NotifyIcon
 			{
-				Icon = new System.Drawing.Icon("Icon.ico"),
+				Icon = icon,
 				Visible = true
 			};
+
+			tray.Click += Tray_Click;
+		}
+
+		private void Tray_Click(object sender, EventArgs e)
+		{
+			this.WindowState = WindowState.Normal;
+			this.Visibility = Visibility.Visible;
+			SystemCommands.RestoreWindow(this);
 		}
 
 		public void BuildViewModel()
@@ -73,7 +86,7 @@ namespace AuralFixation.App
 
 		protected override void OnStateChanged(EventArgs e)
 		{
-			if (WindowState == WindowState.Minimized) this.Hide();
+			if (WindowState == WindowState.Minimized) this.Visibility = Visibility.Collapsed;			
 
 			base.OnStateChanged(e);
 		}
@@ -97,13 +110,20 @@ namespace AuralFixation.App
 
 		private static void Play(string category, bool reset = false)
 		{
-			var request = new PlayRequest()
+			try
 			{
-				FromCart = _service.ListReaders().First().Key,
-				InCategory = category,
-				ResetPlaylist = reset,
-			};
-			_service.Play(request);
+				var request = new PlayRequest()
+				{
+					FromCart = _service.ListReaders().First().Key,
+					InCategory = category,
+					ResetPlaylist = reset,
+				};
+				_service.Play(request);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.StackTrace, ex.Message);
+			}
 		}
 
 		private static DispatcherTimer _timer =
