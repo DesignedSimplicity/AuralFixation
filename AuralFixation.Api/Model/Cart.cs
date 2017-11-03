@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace AuralFixation.Api.Model
 {
-	public class Artist
-    {
+	public class Cart
+	{
 		public string Name { get; set; }
-    }
+		public List<string> Groups { get; set; }
+	}
 }

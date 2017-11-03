@@ -9,18 +9,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using AuralFixation.Api;
-using AuralFixation.Api.Media;
-using AuralFixation.Api.Player;
 
 namespace AuralFixation.Win
 {
     public partial class Splash : Form
     {
-		private WinAmp _winamp = new WinAmp();
+		private Service _service = new Service();
 
         public Splash()
         {
             InitializeComponent();
         }
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			var cart = _service.ListCarts().First();
+			_service.PlayCart(new PlayCartRequest()
+			{
+				FromCart = cart
+			});
+		}
 	}
 }

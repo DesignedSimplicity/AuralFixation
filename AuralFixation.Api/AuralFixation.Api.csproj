@@ -40,23 +40,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\LoadAlbum.cs" />
+    <Compile Include="Actions\LoadGenres.cs" />
+    <Compile Include="Actions\LoadMedia.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="Media\MediaCache.cs" />
     <Compile Include="Media\MediaFile.cs" />
     <Compile Include="Media\MediaFolder.cs" />
     <Compile Include="Media\MediaList.cs" />
-    <Compile Include="Player\Handle.cs" />
-    <Compile Include="Player\IPlayer.cs" />
+    <Compile Include="Model\Cart.cs" />
+    <Compile Include="Player\_Player.cs" />
     <Compile Include="Player\WinAmp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Album.cs" />
     <Compile Include="Model\Artist.cs" />
     <Compile Include="Model\Genre.cs" />
     <Compile Include="Model\Track.cs" />
+    <Compile Include="Reader\AlbumGenreReader.cs" />
+    <Compile Include="Reader\_Reader.cs" />
+    <Compile Include="Reader\MixsetMoodReader.cs" />
+    <Compile Include="Reader\SinglesSetReader.cs" />
+    <Compile Include="Reader\VinylLabelReader.cs" />
     <Compile Include="Service.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Actions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

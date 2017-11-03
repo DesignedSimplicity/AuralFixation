@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace AuralFixation.Api.Model
 {
-    class Album
+    public class Album
     {
-    }
+		public Artist Artist { get; set; }
+		public Genre Genre { get; set; }
+
+		public List<Track> Tracks { get; set; }
+	}
 }

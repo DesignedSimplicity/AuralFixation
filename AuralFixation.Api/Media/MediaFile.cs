@@ -5,21 +5,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using AuralFixation.Api.Actions;
+
 namespace AuralFixation.Api.Media
 {
 	public class MediaFile
-    {
-		public MediaFile(string uri)
+	{
+		private static LoadMedia _loader = new LoadMedia();
+
+		//================================================================================
+		private FileInfo _file;
+
+		internal MediaFile(string uri)
 		{
-			var f = new FileInfo(uri);
-			Uri = f.FullName;
-			FileName = f.Name;
+			_file = new FileInfo(uri);
+			//Folder = LoadMedia.FromFolder(Path.GetDirectoryName(uri));
+			//if (!Folder.Files.Contains(this)) Folder.Files.Add(this);
 		}
 
-		public string Uri { get; set; }
+		//--------------------------------------------------------------------------------
+		public MediaFolder Folder { get; private set; }
 
-		public string FileName { get; set; }
+		public string Key { get { return Uri.ToLowerInvariant(); } }
 
-		public MediaFolder Folder { get; set; }
+		public string Uri { get { return _file.FullName; } }
+
+		public string FileName { get { return _file.Name; } }
 	}
 }

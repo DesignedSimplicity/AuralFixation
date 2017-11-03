@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuralFixation.Api.Model
+namespace AuralFixation.Api.Reader
 {
-	public class Artist
-    {
-		public string Name { get; set; }
-    }
+	class SinglesSetReader
+	{
+	}
 }

@@ -13,6 +13,9 @@ namespace AuralFixation.Api.Player
 {
     public class WinAmp : IPlayer
     {
+		//================================================================================
+		#region Internal Helpers
+
 		private int _winAmpWindowHandle = 0;
 
 		private enum WinAmpMessages
@@ -72,10 +75,6 @@ namespace AuralFixation.Api.Player
 			ReloadSkin = 40291,
 			Close = 40001
 		}
-
-
-		//================================================================================
-		#region Internal Helpers
 
 		private bool Get()
 		{

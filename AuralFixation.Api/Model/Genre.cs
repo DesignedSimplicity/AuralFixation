@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace AuralFixation.Api.Model
 {
-    class Genre
-    {
-    }
+	public class Genre
+	{
+		public Genre(string name) { Name = name; }
+		public string Name { get; private set; }
+		public string Key { get { return Name.ToLowerInvariant(); } }
+	}
 }
