@@ -32,30 +32,7 @@ namespace AuralFixation.App
 
 			BuildViewModel();
 
-			CreateTrayIcon();
-
 			WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-		}
-
-		public void CreateTrayIcon()
-		{
-			var icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().Location);
-
-			var tray = new System.Windows.Forms.NotifyIcon
-			{
-				Icon = icon,
-				Visible = true
-			};
-
-			tray.Click += Tray_Click;
-		}
-
-		private void Tray_Click(object sender, EventArgs e)
-		{
-			this.WindowState = WindowState.Normal;
-			this.Visibility = Visibility.Visible;
-			SystemCommands.RestoreWindow(this);
-			this.Activate();
 		}
 
 		public void BuildViewModel()
@@ -80,14 +57,12 @@ namespace AuralFixation.App
 				}
 			}
 
-			items.ItemsSource = _model.Readers[0].Categories;
-
-			
+			items.ItemsSource = _model.Readers[0].Categories;			
 		}
 
 		protected override void OnStateChanged(EventArgs e)
 		{
-			if (WindowState == WindowState.Minimized) this.Visibility = Visibility.Collapsed;			
+			if (WindowState == WindowState.Minimized) this.Visibility = Visibility.Collapsed;
 
 			base.OnStateChanged(e);
 		}
