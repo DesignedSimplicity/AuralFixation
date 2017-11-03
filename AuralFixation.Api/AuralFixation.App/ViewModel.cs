@@ -35,7 +35,5 @@ namespace AuralFixation.App
 		public string Name { get; private set; }
 
 		public BitmapImage Icon { get; private set; }
-
-		public ClickCategory Click { get { return ClickCategory.Command; } }
 	}
 }

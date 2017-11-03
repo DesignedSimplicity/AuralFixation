@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AuralFixation.App"
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1600">
-    <Grid>
+    <Grid Background="Black">
 		<ItemsControl x:Name="items">
 			<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
@@ -15,11 +15,11 @@
 			</ItemsControl.ItemsPanel>
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<Button x:Name="btn" Click="Click" MouseDoubleClick="DoubleClick" Tag="{Binding Name}">
-						<StackPanel Width="{Binding Icon.Width}">
-							<Image Source="{Binding Icon}" />
-							<TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
-						</StackPanel>
+					<Button x:Name="btn" Click="Click" MouseDoubleClick="DoubleClick" Tag="{Binding Name}" Background="Black" Foreground="White">
+						<Grid>
+							<Image Source="{Binding Icon}" Width="{Binding Icon.Width}" />
+							<TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="24" Margin="0,0,0,24" />
+						</Grid>
 					</Button>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
