@@ -58,7 +58,7 @@ namespace AuralFixation.Api.Model
 			var dir = new DirectoryInfo(uri);
 			if (dir.Exists)
 			{
-				foreach(var file in dir.GetFiles())
+				foreach(var file in dir.GetFiles().OrderBy(x => x.Name.ToLowerInvariant()))
 				{
 					var f = FromFile(file);
 					if (f != null) files.Add(f);

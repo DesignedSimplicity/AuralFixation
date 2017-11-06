@@ -41,8 +41,6 @@ namespace AuralFixation.Api.Reader
 			}
 			var album = albums[Picker.Pick(albums.Length)];
 
-			Console.WriteLine(album);
-
 			return Media.FromPath(album);
 		}
 
