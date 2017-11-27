@@ -61,10 +61,14 @@ namespace AuralFixation.App
 
 				foreach (var category in reader.Categories)
 				{
-					var uri = System.IO.Path.Combine(Config.GenreIconPath, category + ".jpg");
-					var i = new BitmapImage(new Uri(uri));
-					var c = new CategoryNode(category, i);
-					r.Categories.Add(c);
+					try
+					{
+						var uri = System.IO.Path.Combine(Config.GenreIconPath, category + ".jpg");
+						var i = new BitmapImage(new Uri(uri));
+						var c = new CategoryNode(category, i);
+						r.Categories.Add(c);
+					}
+					catch { }
 				}
 			}
 
