@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AuralFixation.Api.Model
 {
-	public enum MediaFileTypes { mp3, wmv, flac }
+	public enum MediaFileTypes { mp3, wmv, flac, m3u }
 
 	public class Media
 	{

@@ -5,16 +5,19 @@ using System.Text;
 using System.Threading;
 
 using AuralFixation.Api.Model;
+using AuralFixation.Api.Player;
 
 namespace AuralFixation.Api
 {
 	public class Service
 	{
 		private Engine _engine;
+		private PlaylistBuilder _builder;
 
 		public Service()
 		{
 			_engine = new Engine();
+			_builder = new PlaylistBuilder();
 		}
 
 		public List<Cover> LoadIcons(string uri)
@@ -56,7 +59,12 @@ namespace AuralFixation.Api
 				Thread.Sleep(100);
 			}
 
-			player.Play(files);
+			var dir = files.First().File.DirectoryName;
+			var playlist = _builder.WritePlaylist(dir);
+			player.Play(Media.FromUri(playlist));
+			//player.Play(files);
+
+			Thread.Sleep(100);
 			response.Playing = player.Status == PlayerStatus.Playing;
 
 			return response;
