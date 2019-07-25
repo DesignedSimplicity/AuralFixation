@@ -15,7 +15,7 @@
 			</ItemsControl.ItemsPanel>
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<Button x:Name="btn" Click="Click" MouseDoubleClick="DoubleClick" Tag="{Binding Name}" Background="Black" Foreground="White">
+					<Button x:Name="btn" Click="Click" MouseRightButtonUp="RightClick" MouseDoubleClick="DoubleClick" Tag="{Binding Name}" Background="Black" Foreground="White">
 						<Grid>
 							<Image Source="{Binding Icon}" Width="{Binding Icon.Width}" />
 							<TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="24" Margin="0,0,0,24" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -82,6 +83,15 @@ namespace AuralFixation.App
 			_timer.Start();
 		}
 
+		private void RightClick(object sender, RoutedEventArgs e)
+		{
+			var img = (Image)e.Source;
+			var grid = (Grid)img.Parent;
+			var btn = (Button)grid.Parent;
+			_category = btn.Tag.ToString();
+			Open(_category);
+		}
+
 		private void DoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			_timer.Stop();
@@ -95,7 +105,16 @@ namespace AuralFixation.App
 		{
 			_timer.Stop();
 
-			if (!String.IsNullOrWhiteSpace(_category)) Play(_category);
+			if (!String.IsNullOrWhiteSpace(_category))
+			{
+				Play(_category);
+			}
+		}
+
+		private static void Open(string category)
+		{
+			var path = System.IO.Path.Combine(Config.AlbumGenrePaths[0], category);
+			Process.Start(path);
 		}
 
 		private static void Play(string category, bool reset = false)
