@@ -21,4 +21,4 @@ There are a few additional features that have been added including:
 2. Double click to reset the current playlist and start playing the selected album
 3. Single click to queue up another album in the existing playlist
 
-![AuralFixation[(https://raw.githubusercontent.com/DesignedSimplicity/AuralFixation/master/AuralFixation.png)
+![AuralFixation](https://raw.githubusercontent.com/DesignedSimplicity/AuralFixation/master/AuralFixation.png)
