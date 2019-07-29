@@ -14,3 +14,11 @@ This small application is designed to backfill that feature in the simplest way 
 2.	Assign that folder a genre and an optional image
 3.	Click on that folder to randomly select an album
 4.	Launch WinAMP and start playing that album
+
+There are a few additional features that have been added including:
+
+1. Right click to open subfolder in Windows Explorer to manually select a specific album
+2. Double click to reset the current playlist and start playing the selected album
+3. Single click to queue up another album in the existing playlist
+
+![AuralFixation[(https://raw.githubusercontent.com/DesignedSimplicity/AuralFixation/master/AuralFixation.png)
