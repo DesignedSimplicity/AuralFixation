@@ -1,13 +1,17 @@
 # AuralFixation `.NET Framework, C#, WPF, XAML`
-A little throwback to the days of physical media and compact disc changers - adding a long missing feature to my favorite software mp3 player.
 
-*Remember back in the day when we used to have to use physical compact discs to listing to music?
-What about when you first got a 5 disc changer and no longer had to change CDs every 74 mins?*
+## A little throwback to the days of physical media and compact disc changers - adding a long missing feature to my favorite software mp3 player.
+
+*Remember back in the day when we used to have to use physical compact discs to listing to music?*
+
+*What about when you first got a 5 disc changer and no longer had to change CDs every 74 mins?*
+
 
 ![AuralFixation](https://raw.githubusercontent.com/DesignedSimplicity/AuralFixation/master/AuralFixation.png)
 
-The one feature I have found lacking from all hardware and software mp3 players is the simple:
-**Pick a single disc at random and play it in sequential order!**
+### The one feature I have found lacking from all hardware and software mp3 players is the simple:
+
+### Pick a single disc at random and play it in sequential order!
 
 I did not want to write yet-another-mp3-player, nor make a massive meta-data-driven overly complex solution.
 
